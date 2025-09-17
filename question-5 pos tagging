@@ -1,0 +1,10 @@
+import spacy
+nlp = spacy.load("en_core_web_sm")
+text = "Krishna is learning Python programming and working on exciting NLP projects."
+doc = nlp(text)
+print("spaCy POS Tags:")
+for token in doc:
+ print(f"{token.text} -> {token.pos_}")
+print("\nspaCy Noun Phrases:")
+for np in doc.noun_chunks:
+ print(np.te
