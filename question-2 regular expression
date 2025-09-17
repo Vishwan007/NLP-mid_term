@@ -1,0 +1,18 @@
+text = """
+Contact us at support@example.com or sales@company.org.
+You can also call +1-123-456-7890 or (987) 654-3210.
+Important dates: 01/09/2025, 2025-09-01, and 1-Sep-2025.
+"""
+# Regex patterns
+email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
+phone_pattern = r'(\+?\d{1,3}[-.\s]?)?(\(?\d{3}\)?[-.\s]?)?\d{3}[-.\s]?\d{4}'
+date_pattern = r'(\d{2}[/-]\d{2}[/-]\d{4}|\d{4}[/-]\d{2}[/-]\d{2}|\d{1,2}[-\s][A-Za-z]{3}[-\s]\d{4})'
+# Extract matches
+emails = re.findall(email_pattern, text)
+phones = re.findall(phone_pattern, text)
+dates = re.findall(date_pattern, text)
+# Since phone regex has groups, flatten results
+phones = ["".join(p) for p in phones]
+print("Emails:", emails)
+print("Phones:", phones)
+print("Dates:", dates)
