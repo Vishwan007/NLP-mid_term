@@ -1,0 +1,29 @@
+from sklearn.feature_extraction.text import CountVectorizer
+d0 = 'I love machine learning'
+d1 = 'Machine learning is amazing'
+d2 = 'I love coding in Python'
+documents = [d0, d1, d2]
+vectorizer = CountVectorizer()
+X_bow = vectorizer.fit_transform(documents)
+print("Feature Names (Vocabulary):", vectorizer.get_feature_names_out())
+print("Bag of Words Matrix:\n", X_bow.toarray())
+# -------------------- TF-IDF --------------------
+from sklearn.feature_extraction.text import TfidfVectorizer
+tfidf = TfidfVectorizer()
+X_tfidf = tfidf.fit_transform(documents)
+print("\nIDF values:")
+for word, idf_val in zip(tfidf.get_feature_names_out(), tfidf.idf_):
+ print(word, ":", idf_val)
+print("\nVocabulary (word indexes):", tfidf.vocabulary_)
+print("\nTF-IDF matrix:\n", X_tfidf.toarray())
+# -------------------- WORD2VEC --------------------
+import nltk
+nltk.download('punkt')
+from nltk.tokenize import word_tokenize
+from gensim.models import Word2Vec
+tokenized_docs = [word_tokenize(doc.lower()) for doc in documents]
+w2v_model = Word2Vec(sentences=tokenized_docs, vector_size=50, window=5, min_count=1,
+workers=4)
+print("\nWord2Vec word vectors (showing first 5 dimensions for brevity):")
+for word in w2v_model.wv.index_to_key:
+ print(word, ":", w2v_model.wv[word][:5]) 
