@@ -1,0 +1,26 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+text = "Hello Krishna, how are you doing today? Running, studying and learning are important
+activities."
+
+tokens = word_tokenize(text)
+print("Tokens:", tokens)
+
+stop_words = set(stopwords.words('english'))
+filtered_tokens = [word for word in tokens if word.lower() not in stop_words and word.isalpha()]
+print("After Stopword Removal:", filtered_tokens)
+
+stemmer = PorterStemmer()
+stemmed_words = [stemmer.stem(word) for word in filtered_tokens]
+print("After Stemming:", stemmed_words)
+
+lemmatizer = WordNetLemmatizer()
+lemmatized_words = [lemmatizer.lemmatize(word) for word in filtered_tokens]
+print("After Lemmatization:", lemmatized_words) 
