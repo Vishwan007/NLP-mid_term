@@ -1,0 +1,24 @@
+import re
+import nltk
+from nltk.corpus import stopwords
+from collections import Counter
+# Download stopwords if not already available
+nltk.download('stopwords')
+# Take user input
+text = input("Enter your text: ")
+# 1. Normalize text: lowercase + remove punctuation/numbers
+text = text.lower()
+text = re.sub(r'[^a-z\s]', '', text)
+# 2. Tokenization
+words = text.split()
+# 3. Remove stopwords
+stop_words = set(stopwords.words('english'))
+filtered_words = [word for word in words if word not in stop_words]
+# 4. Count word frequencies
+word_freq = Counter(filtered_words)
+# 5. Get Top 10 words
+top_10 = word_freq.most_common(10)
+# Display result
+print("\nTop 10 most frequent words:")
+for word, freq in top_10:
+ print(f"{word}: {
